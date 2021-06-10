@@ -4,6 +4,24 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let errDiv = document.getElementById("modal");
+errDiv.classList.toggle("hidden");
+
+let buttons = document.querySelectorAll(".like-glyph");
+
+buttons.forEach(function(button) {
+  button.setAttribute("onclick", "mimicServerCall(); getClickedElement(this)");
+})
+
+function getClickedElement(element) {
+  return element;
+}
+
+mimicServerCall()
+.then(function(response) {
+  let element = getClickedElement();
+  console.log(element)
+})
 
 
 
@@ -12,6 +30,7 @@ const FULL_HEART = '♥'
 //------------------------------------------------------------------------------
 
 function mimicServerCall(url="http://mimicServer.example.com", config={}) {
+
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
       let isRandomFailure = Math.random() < .2
